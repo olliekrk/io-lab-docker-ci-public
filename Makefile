@@ -46,7 +46,6 @@ image:
 push:
 	docker push $(SCHEMA_NAME):latest
 	docker push $(SCHEMA_NAME):turbo_tag
-	docker push $(SCHEMA_NAME):$(TAG)
 
 clean:
 
