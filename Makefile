@@ -40,12 +40,12 @@ image:
 		--build-arg SCHEMA_BUILD_VERSION="$(SCHEMA_BUILD_VERSION)" \
 		--build-arg SCHEMA_CMD="$(SCHEMA_CMD)" \
                 --tag $(SCHEMA_NAME):latest \
-                --tag $(SCHEMA_NAME):turbo_tag \
+                --tag $(SCHEMA_NAME):$(TAG) \
                 .
 
 push:
 	docker push $(SCHEMA_NAME):latest
-	docker push $(SCHEMA_NAME):turbo_tag
+	docker push $(SCHEMA_NAME):$(TAG)
 
 clean:
 
