@@ -22,8 +22,8 @@ SCHEMA_VCS_REF = $(shell git rev-parse --short HEAD)
 
 SCHEMA_BUILD_DATE = $(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 
-SCHEMA_BUILD_VERSION = your app version - framework specyfic
-SCHEMA_CMD = the command your run this container with
+SCHEMA_BUILD_VERSION = 3.6.9 #your app version - framework specyfic
+SCHEMA_CMD = python3 app.py
 
 all: push
 
@@ -39,12 +39,14 @@ image:
 		--build-arg SCHEMA_BUILD_DATE="$(SCHEMA_BUILD_DATE)" \
 		--build-arg SCHEMA_BUILD_VERSION="$(SCHEMA_BUILD_VERSION)" \
 		--build-arg SCHEMA_CMD="$(SCHEMA_CMD)" \
-	
-  # TODO: last part of this command that tags just built image with a specyfic tag
-	
-push: image
-	# TODO: two commands, first pushes the latest image, second pushes the image tagged with specyfic tag
-	
+                --tag $(SCHEMA_NAME):latest \
+                --tag $(SCHEMA_NAME):turbo_tag \
+                .
+
+push:
+	docker push $(SCHEMA_NAME):latest
+	docker push $(SCHEMA_NAME):turbo_tag
+
 clean:
 
 .PHONY: clean image push all
