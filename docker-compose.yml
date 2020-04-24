@@ -2,7 +2,7 @@
 version: '3.0'
 services:
   web:
-    image: olliekrk/io-lab-docker-ci-public:latest
+    build: .
     ports:
       - "5000:5000"
     # TODO: build context, ports and redis dependency
@@ -21,6 +21,8 @@ services:
     ports:
       - "6379:6379"
     volumes: 
-      - ../data:/data
+      - "redis-data:/data"
     # TODO: missing persistence for redis. You need to persist /data directory.
 
+volumes:
+  redis-data:
